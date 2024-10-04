@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-slate-200 text-slate-800;
+    }
+}
+
+.container{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1em;
+
+}
+
+.header {
+    @apply w-full flex items-center justify-between p-4 z-50;
+}
+
+.itemcard {
+    @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4;
+}
+
+.itemcard li{
+    @apply p-4 shadow-lg rounded-lg bg-slate-100 flex flex-col items-center gap-4 font-bold 
+}
+.itemcard img{
+    @apply h-24
+}
+
+.itemcard_desc{
+    @apply flex flex-col
+}
+
+.itemcard p{
+    @apply text-sm text-center
+}
+.itemcard span{
+    @apply text-xs text-left
+}
+
+.personality_tabs{
+    @apply w-full flex flex-wrap gap-2 p-4 items-center justify-center
+}
+.tabs_btn{
+    @apply bg-slate-800 rounded-lg shadow-lg text-slate-100 text-sm px-2 py-1 whitespace-nowrap
+}
+.personality_wrap{
+    @apply flex justify-start w-full
+}
+.personality{
+    @apply text-xs text-gray-700 shadow-md rounded-lg px-2 py-1
+}
+
+.loading_container{
+    @apply flex justify-center items-center h-screen text-teal-800 font-bold
+}
+.loading_container img{
+    @apply w-24
+}
+
+.search_area{
+    @apply w-full flex items-center justify-center mb-4
+}
+
+.searchInput_wrap{
+    @apply p-1 rounded-lg shadow-lg w-full sm:w-8/12 text-sm flex bg-slate-100 
+}
+.searchInput_wrap img{
+    @apply w-12
+}
+.searchInput{
+    @apply w-full focus:outline-none bg-transparent
+}
+
+.homebox img{
+    @apply w-36
+}
+
+.homebox{
+    @apply flex flex-col justify-center items-center h-screen font-bold gap-4
+}
+
+.homebtnbox{}
+
+.homebtnboxUl{
+    @apply grid grid-cols-3 gap-2
+}
+.homebtnboxUl li{
+    @apply bg-slate-700 rounded-lg shadow-lg p-4 cursor-pointer text-slate-100 text-sm text-center
+}
