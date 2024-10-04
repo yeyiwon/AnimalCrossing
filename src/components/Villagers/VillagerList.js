@@ -22,7 +22,9 @@ const VillagerList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null); 
     const [searchTerm, setSearchTerm] = useState("");
-    const [selectedPersonality, setSelectedPersonality] = useState(""); // 선택된 성격 상태 추가
+    const [selectedPersonality, setSelectedPersonality] = useState(""); 
+
+    
 
     const fetchData = async () => {
         const URL = "https://api.nookipedia.com/villagers?game=nh&game=pc";

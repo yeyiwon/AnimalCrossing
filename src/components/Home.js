@@ -14,10 +14,10 @@ const Home = () => {
                         <Link to="/Villagers"> 주민 </Link>
                     </li>
                     <li>
-                        <Link to="/Villagers"> 곤충 </Link>
+                        <Link to="/Bugs"> 곤충 </Link>
                     </li>
                     <li>
-                        <Link to="/Villagers"> 물고기 </Link>
+                        <Link to="/Fish"> 물고기 </Link>
                     </li>
                     <li>
                         <Link to="/Villagers"> 옷 </Link>
