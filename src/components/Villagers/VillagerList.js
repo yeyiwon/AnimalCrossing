@@ -60,13 +60,15 @@ const VillagerList = () => {
     if (loading) return <Loading />;
     if (error) return <div>{error}</div>; 
 
-    // 필터링된 데이터
-    const filteredData = data.filter(villager => {
-        const matchesSearchTerm = villager.krKoName.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesPersonality = selectedPersonality ? villager.personality === personalityKr[selectedPersonality] : true;
+    // 검색된 데이터
+    const searchedData = data.filter(villager => 
+        villager.krKoName.toLowerCase().includes(searchTerm.toLowerCase()) 
+    );
 
-        return matchesSearchTerm && matchesPersonality;
-    });
+    // 필터링된 데이터
+    const filteredData = selectedPersonality === ""
+        ? searchedData
+        : searchedData.filter(villager => villager.personality === selectedPersonality); 
 
     return (
         <div className='container'>
@@ -77,7 +79,7 @@ const VillagerList = () => {
             <div className='personality_tabs'>
                 <button
                     className='tabs_btn'
-                    onClick={() => setSelectedPersonality("")} // 전체 버튼 클릭 시
+                    onClick={() => setSelectedPersonality("")} 
                 >
                     전체
                 </button>
@@ -85,7 +87,7 @@ const VillagerList = () => {
                     <button
                         key={personality}
                         className='tabs_btn'
-                        onClick={() => setSelectedPersonality(personality)} // 성격 영어 키로 설정
+                        onClick={() => setSelectedPersonality(personalityKr[personality])}
                     >
                         {personalityKr[personality]}
                     </button>
