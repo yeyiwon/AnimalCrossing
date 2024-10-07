@@ -3,6 +3,7 @@ import axios from 'axios';
 import { villagers } from 'animal-crossing';
 import Loading from '../loading';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
 
 const personalityKr = {
     Smug: "느끼함",
@@ -15,19 +16,18 @@ const personalityKr = {
     Normal: "친절함",
 };
 
+
 const personalities = Object.keys(personalityKr);
 
 const VillagerList = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); 
+    const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
-    const [selectedPersonality, setSelectedPersonality] = useState(""); 
-
-    
+    const [selectedPersonality, setSelectedPersonality] = useState("");
 
     const fetchData = async () => {
-        const URL = "https://api.nookipedia.com/villagers?game=nh&game=pc";
+        const URL = "https://api.nookipedia.com/villagers";
 
         try {
             const response = await axios.get(URL, {
@@ -38,11 +38,11 @@ const VillagerList = () => {
             });
 
             const animal = villagers.map(villager => {
-                const krKoName = villager.translations.kRko;
+                const krKoName = villager.translations.kRko; // 한국어 이름
                 const villagerData = response.data.find(data => data.name === villager.name);
-                const personality = personalityKr[villagerData?.personality] || villagerData?.personality;
-
-                return { ...villagerData, krKoName, personality };
+                const personality = personalityKr[villagerData?.personality] || villagerData?.personality; // 한국어 성격
+            
+                return { ...villagerData, krKoName, personality,  };
             });
 
             setData(animal);
@@ -51,7 +51,7 @@ const VillagerList = () => {
             setError("데이터를 가져오는 데 실패했습니다.");
             console.error(error);
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
@@ -60,17 +60,17 @@ const VillagerList = () => {
     }, []);
 
     if (loading) return <Loading />;
-    if (error) return <div>{error}</div>; 
+    if (error) return <div>{error}</div>;
 
     // 검색된 데이터
-    const searchedData = data.filter(villager => 
-        villager.krKoName.toLowerCase().includes(searchTerm.toLowerCase()) 
+    const searchedData = data.filter(villager =>
+        villager.krKoName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // 필터링된 데이터
     const filteredData = selectedPersonality === ""
         ? searchedData
-        : searchedData.filter(villager => villager.personality === selectedPersonality); 
+        : searchedData.filter(villager => villager.personality === selectedPersonality);
 
     return (
         <div className='container'>
@@ -81,7 +81,7 @@ const VillagerList = () => {
             <div className='personality_tabs'>
                 <button
                     className='tabs_btn'
-                    onClick={() => setSelectedPersonality("")} 
+                    onClick={() => setSelectedPersonality("")}
                 >
                     전체
                 </button>
@@ -96,17 +96,23 @@ const VillagerList = () => {
                 ))}
             </div>
 
+            <p className='filteredDataCount'>
+                검색 결과 <span>{filteredData.length}</span> 마리
+            </p>
+
             <ul className='itemcard'>
-                {filteredData.map((villager, index) => (
-                    <li key={index}>
-                        <div className='personality_wrap'>
-                            <span className='personality'>{villager.personality}</span>
-                        </div>
-                        <img src={villager.image_url} alt={villager.name} />
-                        <div className='itemcard_desc'>
-                            <p>{villager.krKoName}</p>
-                        </div>
-                    </li>
+                {filteredData.map((villager) => (
+                    <Link to={`/Villagers/${villager.id}`} key={villager.id}>
+                        <li>
+                            <div className='personality_wrap'>
+                                <span className='personality'>{villager.personality}</span>
+                            </div>
+                            <img src={villager.image_url} alt={villager.krKoName} />
+                            <div className='itemcard_desc'>
+                                <p>{villager.krKoName}</p>
+                            </div>
+                        </li>
+                    </Link>
                 ))}
             </ul>
         </div>

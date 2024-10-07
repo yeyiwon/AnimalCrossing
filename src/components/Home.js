@@ -14,17 +14,18 @@ const Home = () => {
                         <Link to="/Villagers"> 주민 </Link>
                     </li>
                     <li>
-                        <Link to="/Bugs"> 곤충 </Link>
+                        <Link to="/RecipesList"> DIY  레시피 </Link>
                     </li>
                     <li>
-                        <Link to="/Fish"> 물고기 </Link>
+                        <Link to="/BugsList"> 곤충 </Link>
                     </li>
                     <li>
-                        <Link to="/Villagers"> 옷 </Link>
+                        <Link to="/FishList"> 물고기 </Link>
                     </li>
                     <li>
-                        <Link to="/Villagers"> DIY  레시피 </Link>
+                        <Link to="/ClothingList"> 옷 </Link>
                     </li>
+
                 </ul>
                 
             </div>
