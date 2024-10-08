@@ -9,8 +9,11 @@ function App() {
       <div className='header'>
         <Backbtn/>
       </div>
+      <div style={{ marginTop: '62px' }}>
+        <Router />
+
+      </div>
       
-      <Router />
     </div>
   );
 }

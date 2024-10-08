@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Loading from "../loading";
 import { Link } from "react-router-dom";
+import { creatures } from 'animal-crossing'; 
 
 const BugsList = () => {
     const [data, setData] = useState([]); 
@@ -19,9 +20,20 @@ const BugsList = () => {
                 },                
             });
 
+            const Bugs = response.data.map((bug) => {
+            const krKoName = creatures.find(creature => creature.name === bug.name)?.translations.kRko || '';
 
-            console.log(response.data); 
-            setData(response.data)
+            return {
+                ...bug,
+                krKoName,
+            };
+        });
+
+
+            console.log(Bugs)
+
+            console.log(response.data);
+            setData(Bugs)
         }catch (err) {
             setError(err.message);
         }finally{
@@ -49,7 +61,7 @@ const BugsList = () => {
                             </div>
                             <img src={bug.image_url} alt={bug.name} />
                             <div className='itemcard_desc'>
-                                <p>{bug.name}</p>
+                                <p>{bug.krKoName}</p>
                             </div>
                         </li>
                     </Link>

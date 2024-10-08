@@ -86,6 +86,7 @@ const favStylesKr = {
     "Simple": "심플함",
 };
 
+// 색깔 한글 변환
 const favColorsKr = {
     "Aqua": "아쿠아",
     "Beige": "베이지",
@@ -105,6 +106,16 @@ const favColorsKr = {
     "Dark wood": "다크우드",
 };
 
+// 취미 한글 변환
+const hobbyKr = {
+    "Education": "공부하기",
+    "Fashion": "쇼핑하기",
+    "Fitness": "운동하기",
+    "Music": "음악듣기",
+    "Nature": "자연을 만끽하기",
+    "Play": "놀기",
+};
+
 const VillagerDetail = () => {
     const { id } = useParams();
 
@@ -121,8 +132,6 @@ const VillagerDetail = () => {
                     "Accept-Version": "1.0.0",
                 },
             });
-
-            console.log(response.data);
             console.log(id);
             
             // 주민 정보 찾기
@@ -138,7 +147,17 @@ const VillagerDetail = () => {
                 const gender = genderKr[selectedVillager?.gender] || selectedVillager?.gender; // 한국어 성별
 
                 // 변환된 정보로 업데이트
-                setVillager({ ...selectedVillager, krKoName, personality, species, birthMonth, gender });
+                setVillager({ 
+                    ...selectedVillager, 
+                    krKoName, 
+                    personality, 
+                    species, 
+                    birthMonth, 
+                    gender,
+                    hobby: hobbyKr[selectedVillager.nh_details.hobby] || selectedVillager.nh_details.hobby,
+                    favColors: selectedVillager.nh_details.fav_colors.map(color => favColorsKr[color] || color).join(', '),
+                    favStyles: selectedVillager.nh_details.fav_styles.map(style => favStylesKr[style] || style).join(', '),
+                });
             } else {
                 setError("해당 주민을 찾을 수 없습니다.");
             }
@@ -160,33 +179,36 @@ const VillagerDetail = () => {
     if (!villager) return <div>주민 정보를 찾을 수 없습니다.</div>;
 
     return (
-            <div className='detailpage'>
+        <div className='detailpage'>
             <div className='detailCard'> 
-                <h1 className='detailName'>{villager.krKoName}</h1>
-                <img className='detailImg' src={villager.nh_details.image_url} alt={villager.name} />
-            </div>
+                <div className='detailImg'>
+                    <img src={villager.image_url} alt={villager.name} />
+                </div>
                 <div className='detailCarddesc'>
+                <h2 className='detailName'>
+                <img src={villager.nh_details.icon_url} alt="" />
+                        {villager.krKoName}
+                </h2>
                     <p>성격 <span>{villager.personality}</span></p>
                     <p>성별 <span>{villager.gender}</span></p>
                     <p>종 <span>{villager.species}</span></p>
                     <p>생일 <span>{villager.birthMonth} {villager.birthday_day}일</span></p>
-                
+                    <p>취미 <span>{villager.hobby}</span></p>
+                    <p>선호 색깔 <span>{villager.favColors}</span></p>
+                    <p>선호 스타일 <span>{villager.favStyles}</span></p>
                 </div>
-
-            <div className='house_img_wrap'>
-                <div>
-                    <p>집 외부</p>
-                    <img className='house_img' src={villager.nh_details.house_exterior_url} alt={villager.name} />
-                </div>
-                <div>
-                    <p>집 내부</p>
-                    <img className='house_img' src={villager.nh_details.house_interior_url} alt={villager.name} />
-                </div>
-
-            
             </div>
 
-
+            <div className='house_img_wrap'>
+                <div className='house_img_box'>
+                    <span> 집 외부</span>
+                    <img className='house_img' src={villager.nh_details.house_exterior_url} alt={villager.name} />
+                </div>
+                <div className='house_img_box'>
+                    <span>집 내부</span>
+                    <img className='house_img' src={villager.nh_details.house_interior_url} alt={villager.name} />
+                </div>
+            </div>
         </div>
     );
 };

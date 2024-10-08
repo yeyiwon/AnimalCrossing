@@ -27,7 +27,7 @@ const VillagerList = () => {
     const [selectedPersonality, setSelectedPersonality] = useState("");
 
     const fetchData = async () => {
-        const URL = "https://api.nookipedia.com/villagers";
+        const URL = "https://api.nookipedia.com/villagers?nhdetails=true";
 
         try {
             const response = await axios.get(URL, {
@@ -74,10 +74,10 @@ const VillagerList = () => {
 
     return (
         <div className='container'>
-            <div className='search_area'>
+            <div className='stiky'>
+                <div className='search_area'>
                 <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
-
             <div className='personality_tabs'>
                 <button
                     className='tabs_btn'
@@ -95,6 +95,8 @@ const VillagerList = () => {
                     </button>
                 ))}
             </div>
+            </div>
+
 
             <p className='filteredDataCount'>
                 검색 결과 <span>{filteredData.length}</span> 마리
@@ -105,7 +107,7 @@ const VillagerList = () => {
                     <Link to={`/Villagers/${villager.id}`} key={villager.id}>
                         <li>
                             <div className='personality_wrap'>
-                                <span className='personality'>{villager.personality}</span>
+                                <span className='personality'># {villager.personality}</span>
                             </div>
                             <img src={villager.image_url} alt={villager.krKoName} />
                             <div className='itemcard_desc'>
