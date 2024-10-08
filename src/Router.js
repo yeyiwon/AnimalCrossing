@@ -13,6 +13,7 @@ import BugsDetail from "./components/Bugs/BugsDetail";
 
 import ClothingList from "./components/Clothing/ClothingList";
 import RecipesList from "./components/Recipes/RecipesList";
+import RecipesDetail from "./components/Recipes/RecipesDetail";
 
 const Router = () => {
     return(
@@ -29,6 +30,7 @@ const Router = () => {
                 <Route path="/ClothingList" element={<ClothingList/>}></Route>
 
                 <Route path="/RecipesList" element={<RecipesList/>}></Route>
+                <Route path="/RecipesList/:id" element={<RecipesDetail/>}></Route>
             </Routes>
 
 
