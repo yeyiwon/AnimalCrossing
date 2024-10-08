@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Loading from '../loading';
 import { villagers } from 'animal-crossing';
+import Header from '../Header';
 
-// 번역 데이터
 const personalityKr = {
     Smug: "느끼함",
     Sisterly: "단순활발",
@@ -54,7 +54,6 @@ const speciesKr = {
     "Lion": "사자"
 };
 
-// 월 한글 변환
 const monthKr = {
     "January": "1월",
     "February": "2월",
@@ -70,13 +69,11 @@ const monthKr = {
     "December": "12월",
 };
 
-// 성별 한글 변환
 const genderKr = {
     "Male": "남자",
     "Female": "여자",
 };
 
-// 스타일 한글 변환
 const favStylesKr = {
     "Active": "스포츠",
     "Cool": "멋쟁이",
@@ -86,7 +83,6 @@ const favStylesKr = {
     "Simple": "심플함",
 };
 
-// 색깔 한글 변환
 const favColorsKr = {
     "Aqua": "아쿠아",
     "Beige": "베이지",
@@ -106,7 +102,6 @@ const favColorsKr = {
     "Dark wood": "다크우드",
 };
 
-// 취미 한글 변환
 const hobbyKr = {
     "Education": "공부하기",
     "Fashion": "쇼핑하기",
@@ -134,7 +129,6 @@ const VillagerDetail = () => {
             });
             console.log(id);
             
-            // 주민 정보 찾기
             const selectedVillager = response.data.find(v => v.id === id); 
             if (selectedVillager) {
                 // 한글 이름과 성격 변환
@@ -146,7 +140,6 @@ const VillagerDetail = () => {
                 const birthMonth = monthKr[selectedVillager?.birthday_month] || selectedVillager?.birthday_month; // 한국어 월
                 const gender = genderKr[selectedVillager?.gender] || selectedVillager?.gender; // 한국어 성별
 
-                // 변환된 정보로 업데이트
                 setVillager({ 
                     ...selectedVillager, 
                     krKoName, 
@@ -180,6 +173,7 @@ const VillagerDetail = () => {
 
     return (
         <div className='detailpage'>
+            <Header title={villager.krKoName}></Header>
             <div className='detailCard'> 
                 <div className='detailImg'>
                     <img src={villager.image_url} alt={villager.name} />

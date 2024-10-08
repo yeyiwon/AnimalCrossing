@@ -15,16 +15,19 @@ body {
 .container{
     max-width: 1100px;
     margin: 0 auto;
-    padding: 1em;
+    /* padding: 1em; */
 
 }
 
 .header {
-    @apply w-full fixed top-0 bg-slate-200 left-0 flex items-center justify-between p-4 z-50;
+    @apply w-full fixed top-0 bg-slate-200 left-0 flex items-center gap-2 p-4 z-50;
+}
+.header h2{
+    @apply font-bold
 }
 
 .itemcard {
-    @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4;
+    @apply p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-[224px];
 }
 
 .itemcard li{
@@ -46,10 +49,14 @@ body {
 }
 
 .personality_tabs{
-    @apply w-full flex flex-wrap gap-2 p-4 items-center justify-center
+    @apply flex overflow-x-auto gap-2 items-center justify-start py-2 w-full
 }
+
 .tabs_btn{
-    @apply bg-slate-800 rounded-lg shadow-lg text-slate-100 text-sm px-2 py-1 whitespace-nowrap
+    @apply bg-slate-100 rounded-lg text-slate-800 text-sm px-2 py-1 whitespace-nowrap transition duration-300 shadow-emerald-100
+}
+.tabs_btn.selected {
+    @apply bg-green-500 text-slate-100 font-bold;
 }
 .personality_wrap{
     @apply flex justify-start w-full
@@ -66,11 +73,11 @@ body {
 }
 
 .stiky {
-    @apply sticky top-[62.5px] bg-slate-200;
+    @apply flex w-full flex-col fixed top-[56px] left-0 bg-slate-200 p-4 gap-2;
 }
 
 .search_area{
-    @apply w-full flex items-center justify-center mb-4
+    @apply w-full flex items-center justify-center
 }
 
 .searchInput_wrap{
@@ -101,7 +108,7 @@ body {
 }
 
 .filteredDataCount{
-    @apply text-slate-500 text-sm py-2 font-semibold
+    @apply text-slate-500 text-sm font-semibold
 }
 .filteredDataCount span{
     @apply text-slate-700
@@ -128,7 +135,7 @@ body {
 
 
 .detailImg{
-    @apply flex items-center justify-center shadow-lg rounded-full h-48 w-48
+    @apply flex items-center justify-center h-48 w-48
     flex-shrink-0 overflow-hidden bg-slate-100
 }
 .detailImg img{
@@ -142,10 +149,10 @@ body {
     @apply w-full;
 }
 .detailCarddesc p {
-    @apply flex items-center gap-2 text-slate-900 bg-slate-200 rounded-lg p-1 text-sm
+    @apply flex items-center gap-2 text-slate-900 bg-slate-200 rounded-lg p-2 text-sm font-semibold
 }
 .detailCarddesc span{
-    @apply text-gray-600 
+    @apply font-normal text-gray-600 
 }
 .house_img_wrap {
     @apply grid sm:grid-cols-2 gap-4 bg-slate-100 p-4 rounded-lg shadow-lg;

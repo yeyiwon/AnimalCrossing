@@ -5,6 +5,8 @@ import Loading from '../loading';
 import Search from '../Search';
 import { Link } from 'react-router-dom';
 
+import Header from '../Header';
+
 const personalityKr = {
     Smug: "느끼함",
     Sisterly: "단순활발",
@@ -38,9 +40,9 @@ const VillagerList = () => {
             });
 
             const animal = villagers.map(villager => {
-                const krKoName = villager.translations.kRko; // 한국어 이름
+                const krKoName = villager.translations.kRko; 
                 const villagerData = response.data.find(data => data.name === villager.name);
-                const personality = personalityKr[villagerData?.personality] || villagerData?.personality; // 한국어 성격
+                const personality = personalityKr[villagerData?.personality] || villagerData?.personality;
             
                 return { ...villagerData, krKoName, personality,  };
             });
@@ -74,33 +76,33 @@ const VillagerList = () => {
 
     return (
         <div className='container'>
+            <Header title="주민"></Header>
             <div className='stiky'>
                 <div className='search_area'>
                 <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
             <div className='personality_tabs'>
-                <button
-                    className='tabs_btn'
-                    onClick={() => setSelectedPersonality("")}
-                >
-                    전체
-                </button>
-                {personalities.map(personality => (
-                    <button
-                        key={personality}
-                        className='tabs_btn'
-                        onClick={() => setSelectedPersonality(personalityKr[personality])}
-                    >
-                        {personalityKr[personality]}
-                    </button>
-                ))}
-            </div>
-            </div>
-
+    <button
+        className={`tabs_btn ${selectedPersonality === "" ? "selected" : ""}`} 
+        onClick={() => setSelectedPersonality("")}
+    >
+        전체
+    </button>
+    {personalities.map(personality => (
+        <button
+            key={personality}
+            className={`tabs_btn ${selectedPersonality === personalityKr[personality] ? "selected" : ""}`}
+            onClick={() => setSelectedPersonality(personalityKr[personality])}
+        >
+            {personalityKr[personality]}
+        </button>
+    ))}
+</div>
 
             <p className='filteredDataCount'>
                 검색 결과 <span>{filteredData.length}</span> 마리
             </p>
+            </div>
 
             <ul className='itemcard'>
                 {filteredData.map((villager) => (

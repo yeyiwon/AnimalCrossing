@@ -6,6 +6,7 @@ const Home = () => {
         <div className="homebox">
             <h1 style={{ textAlign: "center" }}>
                 <img src="./logo192.png" alt="" />
+                <img src="./11.webp" alt="" />
             </h1>
 
             <div className="homebtnbox"> 

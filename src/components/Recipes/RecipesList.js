@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Loading from "../loading";
 import { Link } from "react-router-dom";
+import Header from '../Header';
 
 import { recipes } from 'animal-crossing'
 import Search from '../Search';
@@ -56,14 +57,17 @@ const RecipesList = () => {
         <>
 
         <div className='container'>
-            <h1>레시피 리스트</h1>
+            <Header title="DIY"></Header>
+            <div className='stiky'>
             <div className='search_area'>
                 <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
-
-            <p className='filteredDataCount'>
+                <p className='filteredDataCount'>
                 검색 결과 <span>{searchedData.length}</span> 개
-            </p>
+                </p>
+            </div>
+
+            
 
             <ul className='itemcard'>
                 {searchedData.map((item) => ( 
